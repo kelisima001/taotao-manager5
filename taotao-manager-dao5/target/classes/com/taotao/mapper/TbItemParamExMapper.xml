@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taotao.mapper.TbItemParamExMapper" >
+  <resultMap id="BaseResultMap" type="com.taotao.pojo.TbItemParamModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="item_cat_id" property="itemCatId" jdbcType="BIGINT" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="param_data" property="paramData" jdbcType="LONGVARCHAR" />
+    <result column="item_cat_name" property="itemCatName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getItemParamList" resultMap="BaseResultMap">
+  	select
+  		tip.id as id,
+  		tip.item_cat_id as itemCatId,
+  		tip.created as created,
+  		tip.updated as updated,
+  		tip.param_data as paramData,
+  		tic.name as itemCatName
+  	from
+  		tb_item_param tip
+  	left join tb_item_cat tic
+  	on tip.item_cat_id =tic.id
+  </select>
+</mapper>
